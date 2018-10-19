@@ -6,7 +6,7 @@ static uint32_t gCrc32Table[256] = { 0 };
 
 #define arraysize(f) (sizeof(f) / sizeof(*f))
 
-static void EnsureCrc32TableInited() {
+static void CRC32TableInited() {
   if (gCrc32Table[arraysize(gCrc32Table) - 1])
     return;
   for (uint32_t i = 0; i < arraysize(gCrc32Table); ++i) {
@@ -23,7 +23,7 @@ static void EnsureCrc32TableInited() {
 }
 
 uint32_t UpdateCRC32(uint32_t start, const void* buf, size_t len) {
-  EnsureCrc32TableInited();
+  CRC32TableInited();
 
   uint32_t c = start ^ 0xFFFFFFFF;
   const uint8_t* u = static_cast<const uint8_t*>(buf);
